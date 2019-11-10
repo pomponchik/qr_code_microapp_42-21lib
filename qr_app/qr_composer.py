@@ -6,7 +6,7 @@
 #    By: zytrams <zytrams@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/10 09:08:13 by zytrams           #+#    #+#              #
-#    Updated: 2019/11/10 10:25:04 by zytrams          ###   ########.fr        #
+#    Updated: 2019/11/10 10:27:22 by zytrams          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ class QrComposer():
 		new_h = int(self.A4_HEIGHT / y_times)
 		self.resized_img = self.img.resize((new_w, new_h))
 
+	# Static method
 	@staticmethod
 	def create_image_filled(qr_img, x_times, y_times, A4_W = 2481, A4_H = 3508):
 		a4_img = I.new('RGB', (A4_W, A4_H), color=IC.getrgb('white'))
