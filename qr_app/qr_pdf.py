@@ -6,7 +6,7 @@
 #    By: zytrams <zytrams@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/09 09:51:59 by zytrams           #+#    #+#              #
-#    Updated: 2019/11/10 09:23:15 by zytrams          ###   ########.fr        #
+#    Updated: 2019/11/10 09:53:35 by zytrams          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ class QrPdfSheet():
 		self.specs = labels.Specification(210, 297, x_times, y_times,
 		int(A4_WIDTH / x_times), int(A4_HEIGHT / y_times), background_image=self.bgimg)
 
-	def add_bg_on_page(self, bgimg):
+	#def add_bg_on_page(self, bgimg):
 	# Paths to the images used for backgrounds.
 	# Create a function to draw each label. This will be given the ReportLab drawing
 	# object to draw on, the dimensions (NB. these will be in points, the unit
@@ -50,4 +50,7 @@ class QrPdfSheet():
 		# Save the file and we are done.
 		sheet.save(self.filename)
 		print("{0:s}: {1:d} label(s) output on {2:d} page(s).".format(self.filename, sheet.label_count, sheet.page_count))
+
+	def set_bgimg:
+
 
