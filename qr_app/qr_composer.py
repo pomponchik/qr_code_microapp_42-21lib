@@ -6,19 +6,21 @@
 #    By: zytrams <zytrams@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/10 09:08:13 by zytrams           #+#    #+#              #
-#    Updated: 2019/11/10 14:37:48 by zytrams          ###   ########.fr        #
+#    Updated: 2019/11/11 21:25:03 by zytrams          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 from PIL import Image as I, ImageColor as IC
 from qr_image import QrImage
-
+from qr_pdf import PdfDecorator
 
 class QrComposer():
 	A4_W = 2481
 	A4_H = 3508
 
 	def __init__(self, x_times, y_times):
+		self.pdf_composer = PdfDecorator(None)
+		self.pdf_composer.new_page()
 		self.xchunksize = int(self.A4_W / x_times)
 		self.ychunksize = int(self.A4_H / y_times)
 		self.x_size = x_times
@@ -27,37 +29,44 @@ class QrComposer():
 		self.yoffset = 0
 		if self.xchunksize > self.ychunksize:
 			self.new = self.xchunksize
-			self.resized = int(self.ychunksize / 2)
+			self.resized = int(self.xchunksize / 2)
 		else:
 			self.new = self.xchunksize
 			self.resized = self.xchunksize
 
-	def put_qrs(self, qr_list):
+	def put_qrs(self, qr_list, width_rel = False):
 		x = 0
+		std_y_offset_img = 50
+		std_y_offset_text = 150
 		y = 0
+		ln = 0
 		img_id = 0
 		a4_img = I.new('RGB', (self.A4_W, self.A4_H), color=IC.getrgb('white'))
 		for img in qr_list:
 			resized_img = img.img.resize((self.resized, self.resized))
-			a4_img.paste(resized_img,(self.xoffset
-			+ int((self.new - self.resized) / 2), self.yoffset))
+			self.pdf_composer.put_label((self.xoffset + resized_img.size[0]) / 4.3, (self.yoffset + std_y_offset_text) / 4.3, img.surl)
+			self.pdf_composer.put_label((self.xoffset + resized_img.size[0]) / 4.3, (self.yoffset + std_y_offset_text + 40) / 4.3, img.label)
+			self.pdf_composer.put_image((self.xoffset) / 4.3, (self.yoffset + std_y_offset_img) / 4.3, resized_img.size[0] / 4.3, 0, resized_img)
+			ln = 0
 			x += 1
 			self.xoffset += self.xchunksize
 			if (x >= self.x_size):
 				x = 0
 				self.xoffset = 0
+				ln = 1
 				y += 1
 				self.yoffset += self.ychunksize
 				if (y >= self.y_size):
 					y = 0
 					self.yoffset = 0
 					img_id += 1
+					self.pdf_composer.new_page()
 					print ('qr_image0' + str(img_id) + '.png')
-					QrComposer.save(a4_img, 'qr_image0' + str(img_id) + '.png')
-					a4_img = I.new('RGB', (self.A4_W, self.A4_H), color=IC.getrgb('white'))
+					#QrComposer.save(a4_img, 'qr_image0' + str(img_id) + '.png')
 		img_id += 1
 		print ('qr_image0' + str(img_id) + '.png')
-		QrComposer.save(a4_img, 'qr_image0' + str(img_id) + '.png')
+		self.pdf_composer.save_pdf()
+		#QrComposer.save(a4_img, 'qr_image0' + str(img_id) + '.png')
 
 	# Static method for one page filled t
 	@staticmethod
@@ -88,9 +97,9 @@ class QrComposer():
 
 # Main for testing
 if	__name__ == "__main__":
-	qr_composer = QrComposer(8, 8)
+	qr_composer = QrComposer(3, 8)
 	qr1 = QrImage()
 	qr2 = QrImage('https://ya.ru')
 	qr3 = QrImage('https://google.com')
-	l = [qr1, qr2, qr3] * 10
+	l = [qr1, qr2, qr3] * 30
 	qr_composer.put_qrs(l)
