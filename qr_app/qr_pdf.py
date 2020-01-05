@@ -6,7 +6,7 @@
 #    By: zytrams <zytrams@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/09 09:51:59 by zytrams           #+#    #+#              #
-#    Updated: 2019/11/11 21:21:09 by zytrams          ###   ########.fr        #
+#    Updated: 2020/01/05 04:43:31 by zytrams          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,8 @@ class PdfDecorator():
 
 	def __init__(self, pdfname):
 		self.pdf = FPDF(unit='pt')
-		self.pdf.set_font("Arial", size = 5)
+		self.pdf.add_font('DejaVu', '', '/Users/zytrams/qr/font/dejavu-sans-mono.ttf', uni=True)
+		self.pdf.set_font("DejaVu", size = 5)
 		if pdfname:
 			self.pdfname = pdfname
 		else:
@@ -30,7 +31,11 @@ class PdfDecorator():
 		self.pdf.add_page()
 
 	def put_label(self, x, y, string):
-		self.pdf.text(x, y, string)
+		while string:
+			s = string[:30]
+			self.pdf.text(x, y, s)
+			y = y + 5
+			string = string[30:]
 
 	def put_image(self, x, y, w, h, img):
 		img.save('uga.png', 'PNG')

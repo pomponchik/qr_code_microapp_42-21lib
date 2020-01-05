@@ -6,13 +6,12 @@
 #    By: zytrams <zytrams@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/10 09:08:13 by zytrams           #+#    #+#              #
-#    Updated: 2019/11/11 21:25:03 by zytrams          ###   ########.fr        #
+#    Updated: 2020/01/05 03:55:54 by zytrams          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 from PIL import Image as I, ImageColor as IC
-from qr_image import QrImage
-from qr_pdf import PdfDecorator
+from qr_app.qr_pdf import PdfDecorator
 
 class QrComposer():
 	A4_W = 2481
@@ -61,14 +60,10 @@ class QrComposer():
 					self.yoffset = 0
 					img_id += 1
 					self.pdf_composer.new_page()
-					print ('qr_image0' + str(img_id) + '.png')
-					#QrComposer.save(a4_img, 'qr_image0' + str(img_id) + '.png')
 		img_id += 1
-		print ('qr_image0' + str(img_id) + '.png')
 		self.pdf_composer.save_pdf()
-		#QrComposer.save(a4_img, 'qr_image0' + str(img_id) + '.png')
 
-	# Static method for one page filled t
+	# Static method for one page filled
 	@staticmethod
 	def create_image_filled(qr_img, x_times, y_times, A4_W = 2481, A4_H = 3508):
 		a4_img = I.new('RGB', (A4_W, A4_H), color=IC.getrgb('white'))
@@ -96,10 +91,10 @@ class QrComposer():
 		img.save(fname, 'PNG')
 
 # Main for testing
-if	__name__ == "__main__":
-	qr_composer = QrComposer(3, 8)
-	qr1 = QrImage()
-	qr2 = QrImage('https://ya.ru')
-	qr3 = QrImage('https://google.com')
-	l = [qr1, qr2, qr3] * 30
-	qr_composer.put_qrs(l)
+#if	__name__ == "__main__":
+#   qr_composer = QrComposer(3, 8)
+#	qr1 = QrImage()
+#	qr2 = QrImage('https://ya.ru')
+#	qr3 = QrImage('https://google.com')
+#	l = [qr1, qr2, qr3] * 30
+#	qr_composer.put_qrs(l)

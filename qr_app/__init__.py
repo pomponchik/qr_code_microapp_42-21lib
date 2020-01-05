@@ -6,7 +6,7 @@
 #    By: zytrams <zytrams@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/08 20:39:00 by zytrams           #+#    #+#              #
-#    Updated: 2019/11/10 15:05:45 by zytrams          ###   ########.fr        #
+#    Updated: 2020/01/05 01:07:34 by zytrams          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,3 +16,5 @@ qr_app = Flask(__name__)
 
 from qr_app import qr_routes
 
+if __name__ == "__main__":
+    	qr_app.run('localhost', port = 80)

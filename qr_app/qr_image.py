@@ -6,7 +6,7 @@
 #    By: zytrams <zytrams@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/08 20:51:19 by zytrams           #+#    #+#              #
-#    Updated: 2019/11/10 13:28:25 by zytrams          ###   ########.fr        #
+#    Updated: 2020/01/05 00:51:02 by zytrams          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ import qrcode as QR
 
 # Class for qr image and string url and label for book
 # Field @img: PilImage instance for qr_code image
-# Field @surl: Str for full which leads to book
+# Field @surl: Str for full path which leads to book
 # Field @label: Str for caption under qr code image
 class	QrImage():
 
