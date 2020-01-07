@@ -6,7 +6,7 @@
 #    By: zytrams <zytrams@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/08 21:37:59 by zytrams           #+#    #+#              #
-#    Updated: 2020/01/05 05:08:46 by zytrams          ###   ########.fr        #
+#    Updated: 2020/01/07 15:29:07 by zytrams          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,20 +37,17 @@ def index():
 
 @qr_app.route('/api/get/all')
 def get_qrs_all():
+	#os.remove('libqrcodes.pdf')
 	url = get_url() + '/api/get_all_books'
-	books = json.loads(Reqst.get(url).content)
+	try:
+		books = json.loads(Reqst.get(url).content)
+	except Exception as e:
+		return str(e)
 	qr_books = []
 	for book in books:
-		#qr_app.logger.info()
 		qr_books.append(QrImage('http://42lib.site/book' + book['id'], book['name']))
 	qr_compo.put_qrs(qr_books)
 	try:
 		return send_file(os.path.dirname(os.path.realpath(__file__)) + '/../libqrcodes.pdf', attachment_filename='libqrcodes.pdf')
 	except Exception as e:
 		return str(e)
-
-@qr_app.route('/book<int:b_id>')
-def get_qr(b_id):
-	url = get_url()
-	Reqst.get(url)
-	return str(b_id)
