@@ -11,8 +11,8 @@
 # **************************************************************************** #
 
 from os import environ as Env
-from qr_app.qr_composer import QrComposer
-from qr_app.qr_image import QrImage
+from qr_composer import QrComposer
+from qr_image import QrImage
 from flask import send_file
 import json
 import os
