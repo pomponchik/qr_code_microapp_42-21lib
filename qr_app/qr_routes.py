@@ -23,12 +23,12 @@ qr_compo = QrComposer(3, 8)
 
 # QR_CODE -> потом ссылка простым текстом под qrcode потом название книги
 def get_url():
-	if Env.get('URL'):
-		url = 'http://' + Env.get('URL')
-	if Env.get('URL_IP') and Env.get('URL_PORT') and Env.get('URL_ROUTE'):
-		url = 'http://' + Env.get('URL_IP') + ':' + Env.get('URL_PORT') + Env.get('URL_ROUTE')
-	else:
-		url = 'http://42lib.site'
+	url = 'https://library.21-school.ru/'
+	if Env.get('SITE_URL'):
+		#изменил название старой переменной окружения, т.к. уже используется
+		url = 'http://' + Env.get('SITE_URL')
+	if Env.get('SITE_IP') and Env.get('SITE_PORT') and Env.get('SITE_ROUTE'):
+		url = 'http://' + Env.get('SITE_IP') + ':' + Env.get('SITE_PORT') + Env.get('SITE_ROUTE')
 	return url
 
 @qr_app.route('/')
