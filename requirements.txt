@@ -4,4 +4,4 @@ qrcode
 itsdangerous
 setuptools
 Werkzeug
-fpdf
+fpdf==1.7.2
