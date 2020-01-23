@@ -10,7 +10,6 @@
 #                                                                              #
 # **************************************************************************** #
 
-from qr_app import qr_app
 from os import environ as Env
 from qr_app.qr_composer import QrComposer
 from qr_app.qr_image import QrImage
@@ -51,6 +50,8 @@ def get_qrs_all():
 		return send_file(os.path.dirname(os.path.realpath(__file__)) + '/../libqrcodes.pdf', attachment_filename='libqrcodes.pdf')
 	except Exception as e:
 		return str(e)
+
+
 
 if __name__ == "__main__":
 	from flask import Flask
