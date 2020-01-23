@@ -4,3 +4,4 @@ qrcode
 itsdangerous
 setuptools
 Werkzeug
+fpdf
