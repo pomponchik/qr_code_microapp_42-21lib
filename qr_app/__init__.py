@@ -26,8 +26,8 @@ if __name__ == "__main__":
 	else:
 		if 'URL' in os.environ:
 			if 'PORT' in os.environ:
-				qr_app.run(os.environ['URL'], port=str(int(os.environ['PORT']) + 1))
+				qr_app.run(os.environ['URL'], port=(int(os.environ['PORT']) + 1))
 			else:
 				qr_app.run(os.environ['URL'], port=8081)
 		else:
-			qr_app.run()
+			qr_app.run('0.0.0.0')
