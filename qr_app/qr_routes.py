@@ -45,7 +45,7 @@ def get_qrs_all():
 		return str(e)
 	qr_books = []
 	for book in books:
-		qr_books.append(QrImage('http://42lib.site/book' + book['id'], book['name']))
+		qr_books.append(QrImage(f'{get_url()}/book' + book['id'], book['name']))
 	qr_compo.put_qrs(qr_books)
 	try:
 		return send_file(os.path.dirname(os.path.realpath(__file__)) + '/../libqrcodes.pdf', attachment_filename='libqrcodes.pdf')
