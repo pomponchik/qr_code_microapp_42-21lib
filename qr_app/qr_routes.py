@@ -51,3 +51,20 @@ def get_qrs_all():
 		return send_file(os.path.dirname(os.path.realpath(__file__)) + '/../libqrcodes.pdf', attachment_filename='libqrcodes.pdf')
 	except Exception as e:
 		return str(e)
+
+if __name__ == "__main__":
+	from flask import Flask
+	qr_app = Flask(__name__)
+	if 'QR_URL' in os.environ:
+		if 'QR_PORT' in os.environ:
+			qr_app.run(os.environ['QR_URL'], port=os.environ['QR_PORT'])
+		else:
+			qr_app.run(os.environ['QR_URL'], port=8081)
+	else:
+		if 'URL' in os.environ:
+			if 'PORT' in os.environ:
+				qr_app.run(os.environ['URL'], port=(int(os.environ['PORT']) + 1))
+			else:
+				qr_app.run(os.environ['URL'], port=8081)
+		else:
+			qr_app.run('0.0.0.0')
