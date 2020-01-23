@@ -13,11 +13,12 @@
 from os import environ as Env
 from qr_composer import QrComposer
 from qr_image import QrImage
-from flask import send_file
+from flask import send_file, Flask
 import json
 import os
 import requests as Reqst
 
+qr_app = Flask(__name__)
 qr_compo = QrComposer(3, 8)
 
 # QR_CODE -> потом ссылка простым текстом под qrcode потом название книги
@@ -54,8 +55,7 @@ def get_qrs_all():
 
 
 if __name__ == "__main__":
-	from flask import Flask
-	qr_app = Flask(__name__)
+
 	if 'QR_URL' in os.environ:
 		if 'QR_PORT' in os.environ:
 			qr_app.run(os.environ['QR_URL'], port=os.environ['QR_PORT'])
