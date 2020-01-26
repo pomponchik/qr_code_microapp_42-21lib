@@ -26,7 +26,7 @@ def get_url():
 	url = 'https://library.21-school.ru/'
 	if Env.get('SITE_URL'):
 		#изменил название старой переменной окружения, т.к. уже используется
-		url = 'http://' + Env.get('SITE_URL')
+		url = Env.get('SITE_URL')
 	if Env.get('SITE_IP') and Env.get('SITE_PORT') and Env.get('SITE_ROUTE'):
 		url = 'http://' + Env.get('SITE_IP') + ':' + Env.get('SITE_PORT') + Env.get('SITE_ROUTE')
 	return url
