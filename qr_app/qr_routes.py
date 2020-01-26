@@ -39,6 +39,7 @@ def index():
 def get_qrs_all():
 	#os.remove('libqrcodes.pdf')
 	url = get_url() + '/api/get_all_books'
+	print(url)
 	try:
 		books = json.loads(Reqst.get(url).content)
 	except Exception as e:
